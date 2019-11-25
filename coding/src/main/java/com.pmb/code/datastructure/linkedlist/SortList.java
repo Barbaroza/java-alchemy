@@ -1,0 +1,84 @@
+package com.pmb.code.datastructure.linkedlist;
+
+/**
+ * @author lvrui
+ */
+public class SortList {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode right = sortList(slow.next);
+        slow.next = null;
+        ListNode left = sortList(head);
+        return merge(right, left);
+    }
+
+    private ListNode merge(ListNode r, ListNode l) {
+        ListNode left = l;
+        ListNode right = r;
+        if (left == null) {
+            return right;
+        }
+        if (right == null) {
+            return left;
+        }
+        ListNode res;
+        if (l.val < r.val) {
+            res = new ListNode(l.val);
+            left = left.next;
+        } else {
+            res = new ListNode(r.val);
+            right = right.next;
+        }
+        ListNode temp = res;
+        while (right != null || left != null) {
+            if (left == null) {
+                temp.next = right;
+                return res;
+            } else if (right == null) {
+                temp.next = left;
+                return res;
+            } else if (left.val < right.val) {
+                temp.next = left;
+                left = left.next;
+                temp = temp.next;
+
+            } else {
+                temp.next = right;
+                right = right.next;
+                temp = temp.next;
+            }
+        }
+
+        return res;
+
+    }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        ListNode head = new ListNode(2);
+        head.next = new ListNode(5);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(1);
+        head.next.next.next.next = new ListNode(4);
+        SortList sortList = new SortList();
+        head = sortList.sortList(head);
+        head = null;
+    }
+}

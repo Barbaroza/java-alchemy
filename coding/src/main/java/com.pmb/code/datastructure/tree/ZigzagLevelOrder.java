@@ -1,6 +1,7 @@
 package com.pmb.code.datastructure.tree;
 
-import code.model.TreeNode;
+
+import com.pmb.code.model.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

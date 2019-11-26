@@ -1,6 +1,7 @@
 package com.pmb.code.datastructure.tree;
 
-import code.model.TreeNode;
+
+import com.pmb.code.model.TreeNode;
 
 /**
  * 从前序与中序遍历序列构造二叉树

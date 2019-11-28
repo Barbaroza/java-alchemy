@@ -81,7 +81,7 @@ public class LongestPalindrome {
 
 
     public static void main(String[] args) {
-        LongestPalindrome.longestPalindrome2("cbbd");
+        LongestPalindrome.longestPalindrome2("333");
     }
 
     public static String longestPalindrome2(String s) {
@@ -99,11 +99,12 @@ public class LongestPalindrome {
         String secondStr = res;
         if (charArr[0] == charArr[1]) {
             dp[0][1] = 1;
-            res = s.substring(0, 1);
+            res = s.substring(0, 2);
+            secondStr = res;
             max = 2;
         }
 
-        for (int end = 2; end < length; end++) {
+        for (int end = 1; end < length; end++) {
             for (int start = 0; start < end; start++) {
                 if (charArr[start] == charArr[end]) {
                     if ((dp[start + 1][end - 1] == 1) || start + 1 >= end) {
@@ -114,15 +115,14 @@ public class LongestPalindrome {
                             secondStr = res;
                             res = s.substring(start, end + 1);
                         }
-
                     }
-
                 }
             }
         }
 
-        return res.length() == s.length() ? secondStr : res;
+        return res.length() == secondStr.length() ? secondStr : res;
     }
+
 
 
     public static String longestPalindrome3(String s) {

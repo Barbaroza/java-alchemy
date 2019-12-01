@@ -44,5 +44,9 @@ public class Permute {
         }
     }
 
+    public static void main(String[] args) {
+        Permute permute = new Permute();
+        permute.permute(new int[]{1, 2, 3});
+    }
 
 }

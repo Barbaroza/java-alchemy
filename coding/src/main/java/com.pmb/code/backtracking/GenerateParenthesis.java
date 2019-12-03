@@ -26,7 +26,6 @@ public class GenerateParenthesis {
             res = new ArrayList<String>();
             bt(res, "", 0, 0, n);
         }
-
         return res;
     }
 

@@ -23,4 +23,14 @@ public class TrailingZeroes {
     public int trailingZeroes(int n) {
         return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
     }
+
+    public int trailingZeroes2(int n) {
+        int res = 0;
+        for (int i = 1; n >= Math.pow(5, i); i++) {
+            res = res + (int) (n / Math.pow(5, i));
+        }
+
+        return res;
+
+    }
 }

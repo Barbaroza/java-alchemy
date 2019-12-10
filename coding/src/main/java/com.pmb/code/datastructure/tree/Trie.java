@@ -1,8 +1,5 @@
 package com.pmb.code.datastructure.tree;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 实现 Trie (前缀树)
  * 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
@@ -46,13 +43,12 @@ public class Trie {
             boolean isEnd = index == (chars.length - 1);
             int key = chars[index] - 'a';
 
-            Node node = temp.nodes.get(key);
+            Node node = temp.nodes[key];
             if (node != null && index != (chars.length - 1)) {
                 temp = node;
             } else {
                 temp = temp.put(key, chars[index], isEnd);
             }
-
         }
     }
 
@@ -64,7 +60,7 @@ public class Trie {
         Node temp = this.root;
         boolean res = false;
         for (int index = 0; index < chars.length; index++) {
-            Node node = temp.nodes.get(chars[index] - 'a');
+            Node node = temp.nodes[(chars[index] - 'a')];
             if (node == null) {
                 break;
             } else {
@@ -85,11 +81,11 @@ public class Trie {
         Node temp = this.root;
         boolean res = false;
         for (int index = 0; index < chars.length; index++) {
-            Node node = temp.nodes.get(chars[index] - 'a');
+            Node node = temp.nodes[(chars[index] - 'a')];
             if (node == null) {
                 break;
             } else {
-                if (index == (chars.length - 1) && !node.isEnd) {
+                if (index == (chars.length - 1)) {
                     res = true;
                 }
                 temp = node;
@@ -101,7 +97,7 @@ public class Trie {
     class Node {
         boolean isEnd = false;
         char value;
-        Map<Integer, Node> nodes = new HashMap<>();
+        Node[] nodes = new Node[26];
 
         Node() {
 
@@ -118,7 +114,12 @@ public class Trie {
 
         public Node put(Integer key, char val, boolean isend) {
             Node node = new Node(val, isend);
-            this.nodes.put(key, node);
+            if (this.nodes[key] == null) {
+
+                this.nodes[key] = node;
+            } else {
+                this.nodes[key].isEnd = isend || this.nodes[key].isEnd;
+            }
             return node;
         }
     }

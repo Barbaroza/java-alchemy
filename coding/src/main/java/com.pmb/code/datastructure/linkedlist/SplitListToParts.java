@@ -83,10 +83,8 @@ public class SplitListToParts {
                 } else {
                     tempNode = tempNode.next;
                 }
-
             }
         }
-
         return res;
     }
 }

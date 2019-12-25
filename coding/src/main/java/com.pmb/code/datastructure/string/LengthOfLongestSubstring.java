@@ -51,7 +51,6 @@ public class LengthOfLongestSubstring {
                     } else {
                         uniqueSet.remove(String.valueOf(String.valueOf(s.charAt(start))));
                         start++;
-
                     }
                 }
             }

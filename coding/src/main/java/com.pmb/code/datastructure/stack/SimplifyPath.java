@@ -1,6 +1,8 @@
 package com.pmb.code.datastructure.stack;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Stack;
 
 /**
@@ -27,6 +29,17 @@ public class SimplifyPath {
             res.append("/" + stack.get(i));
         }
         return res.toString();
+    }
+
+
+    public String simplifyPath2(String path) {
+        URL url = null;
+        try {
+            url = new URL(path);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url.toString();
     }
 
 

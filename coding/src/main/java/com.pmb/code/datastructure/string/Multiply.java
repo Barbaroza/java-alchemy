@@ -39,10 +39,7 @@ public class Multiply {
                 res = plus(res, plus == 0 ? String.valueOf(plus) : plus + generateZero(suffix));
             }
         }
-
-
         return res;
-
     }
 
     private String plus(String num1, String num2) {
@@ -96,6 +93,7 @@ public class Multiply {
         }
         return res;
     }
+
     public String multiply2(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
             return "0";

@@ -1,4 +1,4 @@
-package com.pmb.code.datastructure.string;
+package com.pmb.code.datastructure.array;
 
 import java.util.ArrayList;
 import java.util.Arrays;

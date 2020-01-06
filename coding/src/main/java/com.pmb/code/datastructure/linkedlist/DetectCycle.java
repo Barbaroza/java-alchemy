@@ -52,7 +52,6 @@ public class DetectCycle {
                     break;
                 }
                 tempNode = tempNode.next;
-
             }
             res = tempNode;
         }

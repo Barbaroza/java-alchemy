@@ -4,7 +4,7 @@ package com.pmb.code.dp;
  * @star
  */
 public class LengthOfLIS {
-   
+
 
     public static int lengthOfLIS2(int[] nums) {
         int[] dp = new int[nums.length];

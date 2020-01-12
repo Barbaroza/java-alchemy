@@ -21,89 +21,79 @@ import java.util.Map;
  * @author lvrui
  */
 public class LRUCache {
+    Node headNode;
+    Node tailNode;
+    int size;
+    int capacity;
+    Map<Integer, Node> cacheMap;
+
     class Node {
-        int key;
-        int value;
+        int key, value;
         Node preNode;
         Node nextNode;
-
-        Node() {
-
-        }
-
-        Node(int key, int value) {
-            this.key = key;
-            this.value = value;
-        }
-
     }
 
-    private Map<Integer, Node> cacheMap = null;
-    private int capacity;
-    private int size;
-
-    private Node head;
-    private Node tail;
-
-    public LRUCache(final int capacity) {
+    public LRUCache(int capacity) {
         this.size = 0;
         this.capacity = capacity;
-        this.cacheMap = new HashMap<>(capacity);
-        this.head = new Node();
-        this.tail = new Node();
-        this.head.nextNode = this.tail;
-        this.tail.preNode = this.head;
-
+        cacheMap = new HashMap<>(capacity);
+        headNode = new Node();
+        tailNode = new Node();
+        headNode.nextNode = tailNode;
+        tailNode.preNode = headNode;
     }
 
-    private Node removeTail() {
-        Node preNode = tail.preNode;
-        this.tail.preNode = tail.preNode.preNode;
-        this.tail.preNode.nextNode = this.tail;
-        this.size--;
-        return preNode;
+    public int get(int key) {
+        Node node = cacheMap.get(key);
+        if (node != null) {
+            removeNode(node);
+            insertHead(node);
+        }
+        return node == null ? -1 : node.value;
     }
 
-    private Node remove(Node node) {
+    private void insertHead(Node node) {
+        Node nextNode = this.headNode.nextNode;
+        this.headNode.nextNode = node;
+        nextNode.preNode = node;
+        node.nextNode = nextNode;
+        node.preNode = headNode;
+        this.size++;
+    }
+
+    private Node removeNode(Node node) {
         node.preNode.nextNode = node.nextNode;
         node.nextNode.preNode = node.preNode;
         this.size--;
         return node;
     }
 
-    private void insertHead(Node node) {
-        Node temp = this.head.nextNode;
-        this.head.nextNode = node;
-        node.preNode = this.head;
-        node.nextNode = temp;
-        temp.preNode = node;
-        size++;
-    }
-
-
-    public int get(int key) {
-        Node node = this.cacheMap.get(key);
-        if (node != null) {
-            this.remove(node);
-            this.insertHead(node);
-        }
-
-        return node == null ? -1 : node.value;
-    }
-
     public void put(int key, int value) {
-        Node node = this.cacheMap.get(key);
-        Node insert = new Node(key, value);
+        Node node = cacheMap.get(key);
         if (node != null) {
-            this.cacheMap.remove(this.remove(node).key);
+            removeNode(node);
+            cacheMap.remove(key);
         } else {
-            if (this.size == this.capacity) {
-                this.cacheMap.remove(removeTail().key);
+            if (size == capacity) {
+                cacheMap.remove(removeTail().key);
             }
         }
-        this.insertHead(insert);
-        cacheMap.put(key, insert);
+        Node insert = new Node();
+        insert.key = key;
+        insert.value = value;
+        insertHead(insert);
+        this.cacheMap.put(key, insert);
+
     }
+
+    private Node removeTail() {
+        Node remove = this.tailNode.preNode;
+        this.tailNode.preNode = this.tailNode.preNode.preNode;
+        this.tailNode.preNode.nextNode = this.tailNode;
+        this.size--;
+        return remove;
+    }
+
 
     /**
      * ["LRUCache","put","put","get","put","get","put","get","get","get"]
@@ -124,7 +114,9 @@ public class LRUCache {
         LRUCache l2 = new LRUCache(2);
         l2.put(1, 1);
         l2.put(2, 2);
+        l2.put(3, 3);
         l2.get(1);
+        l2.get(2);
         l2.put(3, 3);
         l2.get(2);
         l2.put(4, 4);

@@ -1,5 +1,5 @@
 # java-alchemy
-## practice make better
+## practice makes better
 -   structure 
 
 | module-name | description |  

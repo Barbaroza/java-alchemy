@@ -61,6 +61,8 @@ public class RotateRight {
         ListNode l1 = new ListNode(0);
         l1.next = new ListNode(1);
         l1.next.next = new ListNode(2);
-        rotate.rotateRight(l1, 0);
+
+        ListNode listNode = new ListNode(1);
+
     }
 }

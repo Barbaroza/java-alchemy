@@ -24,18 +24,58 @@ public class ReverseBetween {
         if (head == null) {
             return null;
         }
-        int length = 1;
-        ListNode current = head;
-        ListNode preNode = null;
-        while (length < n) {
-            if (length > m && length < n) {
+        ListNode vNode = new ListNode(0);
+        vNode.next = head;
+        ListNode preNode = vNode;
+        ListNode currentNode = head;
+        int size = 0;
+        while (currentNode != null) {
+            size++;
+            if (size == m) {
+                ListNode start = currentNode;
+                ListNode startPre = preNode;
+                while (size <= n) {
+                    ListNode next = currentNode.next;
 
+                    size++;
+                }
+
+                break;
             }
-            length++;
-            preNode = head;
-            head = head.next;
+            preNode = currentNode;
+            currentNode = currentNode.next;
         }
 
-        return
+        return vNode.next;
+    }
+
+    public ListNode reverseBetween2(ListNode head, int m, int n) {
+        if (head == null) {
+            return null;
+        }
+        int start = m, end = n;
+        ListNode pre = null, current = head;
+        while (start > 1) {
+            pre = current;
+            current = current.next;
+            start--;
+            end--;
+        }
+        ListNode middlePre = pre;
+        ListNode middleNext = current;
+        while (end > 0) {
+            ListNode temp = current.next;
+            current.next = pre;
+            pre = current;
+            current = temp;
+            end--;
+        }
+        if (middlePre != null) {
+            middlePre.next = pre;
+        } else {
+            head = pre;
+        }
+        middleNext.next = current;
+        return head;
     }
 }

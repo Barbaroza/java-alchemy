@@ -55,7 +55,37 @@ public class RotateRight {
         }
     }
 
+    public ListNode rotateRight2(ListNode head, int k) {
+        if(head == null || head.next == null || k<0)
+        {
+            return head;
+        }
+        ListNode pre = null,current = head;
+        int size = 0;
+        while(current!=null)
+        {
+            pre = current;
+            current = current.next;
+            size++;
+        }
 
+        ListNode last = pre;
+        last.next = head;
+
+        int offset =size -k% size;
+        ListNode mid = null;
+        pre = null;
+        current = head;
+        while(offset>0)
+        {
+            offset--;
+            pre = current;
+            current = current.next;
+        }
+
+        pre.next = null;
+        return current;
+    }
     public static void main(String[] args) {
         RotateRight rotate = new RotateRight();
         ListNode l1 = new ListNode(0);

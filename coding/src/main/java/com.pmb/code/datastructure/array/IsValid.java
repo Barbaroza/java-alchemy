@@ -1,5 +1,9 @@
 package com.pmb.code.datastructure.array;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
 /**
  * 有效的括号
  * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
@@ -39,7 +43,41 @@ package com.pmb.code.datastructure.array;
  * @author lvrui
  */
 public class IsValid {
+    Map<Character, Character> positiveMap = new HashMap<>();
+    Map<Character, Character> oppositeMap = new HashMap<>();
+
+    public IsValid() {
+        positiveMap.put(new Character('{'), new Character('}'));
+        positiveMap.put(new Character('('), new Character(')'));
+        positiveMap.put(new Character('['), new Character(']'));
+        oppositeMap.put(new Character(']'), new Character('['));
+        oppositeMap.put(new Character('}'), new Character('{'));
+        oppositeMap.put(new Character(')'), new Character('('));
+    }
+
     public boolean isValid(String s) {
+
+        if (s == null || s.isEmpty()) {
+            return false;
+        }
+        char[] chars = s.toCharArray();
+        Stack<Character> current = new Stack<>();
+
+        for (char c : chars) {
+            if (positiveMap.containsKey(c)) {
+                current.push(c);
+            } else if (oppositeMap.containsKey(c)) {
+                if (current.isEmpty()) {
+                    return false;
+                }
+                Character pop = current.pop();
+                if (!oppositeMap.get(c).equals(pop)) {
+                    return false;
+                }
+            }
+
+        }
+        return current.isEmpty();
 
     }
 

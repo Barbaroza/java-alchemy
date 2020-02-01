@@ -78,7 +78,64 @@ public class SortList {
         head.next.next.next = new ListNode(1);
         head.next.next.next.next = new ListNode(4);
         SortList sortList = new SortList();
-        head = sortList.sortList(head);
+        head = sortList.sortList2(head);
         head = null;
+    }
+
+    public ListNode sortList2(ListNode head) {
+        if(head == null || head.next ==null)
+        {
+            return head;
+        }
+        ListNode current = head;
+        ListNode doubleCurrent = head;
+        while(doubleCurrent.next != null && doubleCurrent.next.next != null) {
+            current = current.next;
+            doubleCurrent = doubleCurrent.next.next;
+        }
+        ListNode leftList = sortList2(current.next);
+        current.next = null;
+        ListNode rightList = sortList2(head);
+        return sort(leftList,rightList);
+    }
+
+    private ListNode sort(ListNode left ,ListNode right)
+    {
+        if(left == null)
+        {
+            return right;
+        }
+        if(right == null)
+        {
+            return left;
+        }
+        ListNode vNode = new ListNode(0);
+        ListNode vTemp = vNode;
+        while(right!=null || left !=null)
+        {
+            if(right == null)
+            {
+                vTemp.next = left;
+                break;
+            }
+            if(left == null ){
+                vTemp.next = right;
+                break;
+            }
+            ListNode tempNode = null;
+            if(left.val < right.val)
+            {
+                tempNode = left;
+                left = left.next;
+            }else{
+                tempNode = right;
+                right = right.next;
+            }
+            vTemp.next = tempNode;
+            vTemp = vTemp.next;
+            vTemp.next = null;
+        }
+
+        return vNode.next;
     }
 }

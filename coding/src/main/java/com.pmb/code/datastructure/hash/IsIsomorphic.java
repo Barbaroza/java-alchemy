@@ -1,6 +1,8 @@
 package com.pmb.code.datastructure.hash;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,34 +27,62 @@ import java.util.Map;
  * 输出: true
  * 说明:
  * 你可以假设 s 和 t 具有相同的长度。
- * @star
+ *
  * @author lvrui
+ * @star
  */
 public class IsIsomorphic {
     public boolean isIsomorphic(String s, String t) {
         if (s == null || t == null || s.length() != t.length()) {
             return false;
         }
-        Map<Character, Character> map = new HashMap<>(s.length() * 2);
+        Map<Character, List<Integer>> map1 = new HashMap<>(s.length());
+        Map<Character, List<Integer>> map2 = new HashMap<>(s.length());
         for (int index = 0; index < s.length(); index++) {
             char c = s.charAt(index);
             char cc = t.charAt(index);
-            Character character = map.putIfAbsent(c, cc);
-            if (character != null && !character.equals(cc)) {
+            List<Integer> integers = map1.get(c);
+            if (integers == null) {
+                integers = new ArrayList<Integer>();
+                map1.put(c, integers);
+            }
+            integers.add(index);
+            List<Integer> integers2 = map2.get(cc);
+            if (integers2 == null) {
+                integers2 = new ArrayList<Integer>();
+                map2.put(cc, integers2);
+            }
+            integers2.add(index);
+            if (!integers.equals(integers2)) {
                 return false;
             }
-            Character character1 = map.get(cc);
-            if (character1!=null && !character1.equals(c)) {
-                return false;
-            }
-
-
         }
         return true;
     }
+    public boolean isIsomorphic2(String s, String t) {
+        return isIsomorphicHelper(s).equals(isIsomorphicHelper(t));
+    }
+
+    private String isIsomorphicHelper(String s) {
+        int[] map = new int[128];
+        int n = s.length();
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            //当前字母第一次出现,赋值
+            if (map[c] == 0) {
+                map[c] = count;
+                count++;
+            }
+            sb.append(map[c]);
+        }
+        return sb.toString();
+    }
+
 
     public static void main(String[] args) {
         IsIsomorphic isIsomorphic = new IsIsomorphic();
-        isIsomorphic.isIsomorphic("ab", "ca");
+        isIsomorphic.isIsomorphic("add", "egg");
     }
 }

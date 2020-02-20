@@ -32,12 +32,47 @@ public class FindDiagonalOrder {
 
     public int[] findDiagonalOrder(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {
-            return null;
+            return new int[0];
         }
 
         int length = matrix.length;
         int width = matrix[0].length;
         int[] res = new int[length * width];
-        
+
+        int index = 0, i = 0, j = 0;
+        while (index < length * width) {
+            res[index] = matrix[i][j];
+
+            if (flag) {
+                if (i - 1 >= 0 && j + 1 < width) {
+                    i--;
+                    j++;
+                } else {
+                    if (j + 1 < width) {
+                        j++;
+                    } else if (i + 1 < length) {
+                        i++;
+                    }
+                    flag = !flag;
+
+                }
+            } else {
+                if (i + 1 < length && j - 1 >= 0) {
+                    i++;
+                    j--;
+
+                } else {
+                    if (i + 1 < length) {
+                        i++;
+                    } else if (j + 1 < width) {
+                        j++;
+                    }
+                    flag = !flag;
+
+                }
+            }
+            index++;
+        }
+        return res;
     }
 }

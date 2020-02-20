@@ -14,6 +14,7 @@ import com.pmb.code.model.TreeNode;
  * <p>
  * 前序遍历 preorder = [3,9,20,15,7]
  * 中序遍历 inorder = [9,3,15,20,7]
+ *  后序遍历 postorder = [9,15,7,20,3]
  * 返回如下的二叉树：
  * <p>
  * 3

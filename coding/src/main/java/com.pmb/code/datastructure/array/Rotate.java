@@ -26,6 +26,7 @@ package com.pmb.code.datastructure.array;
  * 要求使用空间复杂度为 O(1) 的原地算法。
  *
  * @author lvrui
+ * @star
  */
 public class Rotate {
 

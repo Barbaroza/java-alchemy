@@ -60,4 +60,59 @@ public class PostorderTraversal {
 
     }
 
+    List<Integer> pop(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode current = root;
+        Set<TreeNode> set = new HashSet<>();
+
+        if (current == null) {
+            return res;
+        }
+
+        while (current != null || !stack.isEmpty()) {
+            while (current != null && !set.contains(current)) {
+                stack.push(current);
+                current = current.left;
+            }
+            current = stack.peek();
+            if (current.right == null || set.contains(current)) {
+                res.add(current.val);
+                set.add(current);
+                stack.pop();
+                if (stack.isEmpty()) {
+                    return res;
+                }
+                current = stack.peek().right;
+
+            } else {
+                res.add(current.val);
+                current = current.right;
+            }
+        }
+
+        return res;
+    }
+
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        LinkedList<Integer> output = new LinkedList<>();
+        if (root == null) {
+            return output;
+        }
+
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pollLast();
+            output.addFirst(node.val);
+            if (node.left != null) {
+                stack.add(node.left);
+            }
+            if (node.right != null) {
+                stack.add(node.right);
+            }
+        }
+        return output;
+    }
+
 }

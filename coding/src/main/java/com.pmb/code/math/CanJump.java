@@ -32,7 +32,6 @@ public class CanJump {
         Set<Integer> set = new HashSet<>();
         boolean res = findWay(nums, 0, set);
         return res;
-
     }
 
     private boolean findWay(int[] nums, int i, Set<Integer> set) {

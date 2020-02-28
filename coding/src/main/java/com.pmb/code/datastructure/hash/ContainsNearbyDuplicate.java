@@ -1,9 +1,6 @@
 package com.pmb.code.datastructure.hash;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 存在重复元素 II
@@ -26,30 +23,23 @@ import java.util.Map;
  */
 public class ContainsNearbyDuplicate {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        if (nums == null || nums.length == 0 || k < 0) {
+        if (nums == null || nums.length <2|| k < 0) {
             return false;
         }
-        Map<Integer, List<Integer>> indexMap = new HashMap<Integer, List<Integer>>();
-
-        for (int index = 0; index < nums.length; index++) {
-            List<Integer> array = indexMap.get(nums[index]);
-            if (array == null) {
-                array = new ArrayList<Integer>();
-                indexMap.put(nums[index], array);
+        Set<Integer> unique = new HashSet<Integer>();
+        for(int i=0;i<k+1&&i<nums.length;i++)
+        {
+            if(!unique.add(nums[i]))
+            {
+                return true;
             }
-            array.add(index);
         }
-        for (Map.Entry<Integer, List<Integer>> entry : indexMap.entrySet()) {
-            List<Integer> array = entry.getValue();
-            if (array.size() > 1) {
-                for (int i = 0; i < array.size(); i++) {
-                    for (int j = i + 1; j < array.size(); j++) {
-                        if ((array.get(j) - array.get(i) == k)) {
-
-                            return true;
-                        }
-                    }
-                }
+        for(int i=1,j=k+1;j<nums.length;i++,j++)
+        {
+            unique.remove(nums[i-1]);
+            if(!unique.add(nums[j]))
+            {
+                return true;
             }
         }
 

@@ -1,4 +1,4 @@
-package com.pmb.code.datastructure.tree.BTS;
+package com.pmb.code.datastructure.array;
 
 import java.util.HashMap;
 import java.util.Map;

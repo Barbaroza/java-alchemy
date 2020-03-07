@@ -44,9 +44,44 @@ public class Rob {
         return dp[nums.length - 1];
     }
 
+    public int getCount(int n) {
+        int res = 0;
+        while (n != 0) {
+            if (n % 10 == 1) {
+                res++;
+            }
+            n = n / 10;
+        }
+        return res;
+    }
+
+    public String getN(String a) {
+        StringBuilder sb = new StringBuilder();
+        if (a == null || a.isEmpty()) {
+            return sb.toString();
+        }
+        char[] temp = a.toCharArray();
+        int count = 0;
+        char pre = temp[0],current = temp[0];
+        for (char entry : temp) {
+            current = entry;
+            if (pre == entry) {
+                count++;
+            } else {
+                sb.append(count);
+                sb.append(pre);
+                count=1;
+                pre = entry;
+            }
+        }
+        sb.append(count).append(current);
+        return sb.toString();
+    }
 
     public static void main(String[] args) {
         Rob rob = new Rob();
+
+        String count = rob.getN("skkkkks");
         rob.rob(new int[]{1, 2, 3, 1});
     }
 }

@@ -1,6 +1,4 @@
-package bobo.algo;
-
-import com.pmb.algorithm.sorting.basic.selection.cases.SortTestHelper;
+package com.pmb.algorithm.sorting.basic.insertion.basic;
 
 public class InsertionSort{
 
@@ -11,11 +9,19 @@ public class InsertionSort{
 
         int n = arr.length;
         for (int i = 0; i < n; i++) {
-            Comparable e = arr[i];
-            int j = i;
-            for( ; j > 0 && arr[j-1].compareTo(e) > 0 ; j--)
-                arr[j] = arr[j-1];
-            arr[j] = e;
+
+            // 寻找元素arr[i]合适的插入位置
+
+            // 写法1
+//            for( int j = i ; j > 0 ; j -- )
+//                if( arr[j].compareTo( arr[j-1] ) < 0 )
+//                    swap( arr, j , j-1 );
+//                else
+//                    break;
+
+            // 写法2
+            for( int j = i; j > 0 && arr[j].compareTo(arr[j-1]) < 0 ; j--)
+                swap(arr, j, j-1);
 
         }
     }
@@ -29,7 +35,7 @@ public class InsertionSort{
     // 测试InsertionSort
     public static void main(String[] args) {
 
-        int N = 10000;
+        int N = 20000;
         Integer[] arr = SortTestHelper.generateRandomArray(N, 0, 100000);
         SortTestHelper.testSort("InsertionSort", arr);
 

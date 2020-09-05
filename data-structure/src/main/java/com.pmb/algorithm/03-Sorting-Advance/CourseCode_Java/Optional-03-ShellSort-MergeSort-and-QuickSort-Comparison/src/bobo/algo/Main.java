@@ -25,7 +25,7 @@ public class Main {
             Integer[] arr4 = Arrays.copyOf(arr1, arr1.length);
             Integer[] arr5 = Arrays.copyOf(arr1, arr1.length);
 
-            time1 += SortTestHelper.testSort2("bobo.algo.ShellSort", arr1);
+            time1 += SortTestHelper.testSort2("ShellSort", arr1);
             time2 += SortTestHelper.testSort2("bobo.algo.MergeSort", arr2);
             time3 += SortTestHelper.testSort2("bobo.algo.QuickSort", arr3);
             time4 += SortTestHelper.testSort2("bobo.algo.QuickSort2Ways", arr4);

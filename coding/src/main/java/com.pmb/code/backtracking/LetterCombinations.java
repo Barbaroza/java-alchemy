@@ -71,7 +71,7 @@ public class LetterCombinations {
     }
 
     public List<String> letterCombinations(String digits) {
-        List<String> res =  new ArrayList<>();
+        List<String> res = new ArrayList<>();
         if (digits != null && !digits.isEmpty()) {
             char[] chars = digits.toCharArray();
             String stack = "";
@@ -88,6 +88,43 @@ public class LetterCombinations {
         List<String> strings = map.get(String.valueOf(chars[index]));
         for (int i = 0; i < strings.size(); i++) {
             begin(chars, index + 1, res, stack + strings.get(i));
+        }
+    }
+
+    /**
+     * 尝试优化
+     *
+     * @param digits
+     * @return
+     */
+    public List<String> letterCombinations2(String digits) {
+        List<String> res = new ArrayList<>();
+        if (digits != null && !digits.isEmpty()) {
+            char[] chars = digits.toCharArray();
+            StringBuilder letterBuilder = new StringBuilder();
+            List<List<String>> matrix = new ArrayList<>(chars.length);
+            for (char digital : chars) {
+                matrix.add(map.get(String.valueOf(digital)));
+            }
+            dfs(matrix, 0, res, letterBuilder);
+
+
+        }
+        return res;
+    }
+
+    private void dfs(List<List<String>> matrix, int i, List<String> res, StringBuilder letterBuilder) {
+        if (i < matrix.size()) {
+            List<String> strings = matrix.get(i);
+            for (String character : strings) {
+                letterBuilder.append(character);
+                if (letterBuilder.length() == matrix.size()) {
+                    res.add(letterBuilder.toString());
+                } else {
+                    dfs(matrix, i + 1, res, letterBuilder);
+                }
+                letterBuilder.deleteCharAt(letterBuilder.length() - 1);
+            }
         }
     }
 

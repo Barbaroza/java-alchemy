@@ -1,4 +1,4 @@
-package com.pmb.code.gd;
+package com.pmb.code.greedy;
 
 import java.util.ArrayList;
 import java.util.Arrays;

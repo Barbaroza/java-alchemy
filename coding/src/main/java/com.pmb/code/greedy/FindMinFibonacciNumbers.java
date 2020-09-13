@@ -1,4 +1,4 @@
-package com.pmb.code.model;
+package com.pmb.code.greedy;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -46,28 +46,67 @@ public class FindMinFibonacciNumbers {
     public int findMinFibonacciNumbers(int k) {
         int first = 1;
         int second = 1;
-        int current = second;
+        int current = 0;
         List<Integer> arr = new LinkedList<>();
         arr.add(1);
-        while (current < k) {
-            arr.add(current);
-            int temp = current;
+        arr.add(1);
+        while (true) {
             current = first + second;
+            if (current > k) {
+                break;
+            }
+            arr.add(current);
             first = second;
-            second = temp;
+            second = current;
         }
         return getN(k, arr, arr.size() - 1);
     }
 
     private int getN(int k, List<Integer> arr, int i) {
         Integer integer = arr.get(i);
-        int divide = k % integer;
-        int res = k / integer;
-        return divide == 0 ? res : res + getN(divide, arr, i - 1);
+        int remainder = k % integer;
+        int value = k / integer;
+        return remainder == 0 ? value : value + getN(remainder, arr, i - 1);
     }
+
+    public int getFibonacci(int k) {
+        if (k == 1 || k == 0) {
+            return 1;
+        } else if (k == 2) {
+            return 2;
+        }
+        int temp = 0;
+        int l = 1;
+        int res = 2;
+        int i = 0;
+        while (i <= k) {
+            temp = res;
+            res = res + l;
+            l = temp;
+            if (res == k) {
+                return k;
+            } else if (res > k) {
+                return temp;
+            }
+            i++;
+        }
+        return 0;
+    }
+
+    public int findMinFibonacciNumbers2(int k) {
+        int less = getFibonacci(k);
+        if (less == k) {
+            return 1;
+        }
+        return findMinFibonacciNumbers(k - less) + 1;
+
+    }
+
 
     public static void main(String[] args) {
         FindMinFibonacciNumbers findMaxConsecutiveOnes = new FindMinFibonacciNumbers();
-        int asdasd = findMaxConsecutiveOnes.findMinFibonacciNumbers(19);
+        int asdasd = findMaxConsecutiveOnes.findMinFibonacciNumbers2(19);
+
+
     }
 }

@@ -1,4 +1,4 @@
-package com.pmb.code.gd;
+package com.pmb.code.greedy;
 
 /**
  * 最大正方形

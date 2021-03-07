@@ -36,30 +36,7 @@ import java.util.Map;
  * @author lvrui
  */
 public class NumFactoredBinaryTrees {
-    public int numFactoredBinaryTrees(int[] A) {
-        int MOD = 1_000_000_007;
 
-        Arrays.sort(A);
-        long[] dp = new long[A.length];
-        Arrays.fill(dp, 1);
-        Map<Integer, Integer> index = new HashMap();
-        for (int i = 0; i < A.length; ++i)
-            index.put(A[i], i);
-        long sum = 0;
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < i; j++) {
-                if (A[i] % A[j] == 0) { // A[j] is left child
-                    int right = A[i] / A[j];
-                    if (index.containsKey(right)) {
-                        dp[i] = (dp[i] + dp[j] * dp[index.get(right)]) % MOD;
-                    }
-                }
-            }
-            sum = (sum + dp[i]) % MOD;
-        }
-
-        return (int) sum % MOD;
-    }
 
     public int numFactoredBinaryTrees(int[] A) {
         int MOD = 1_000_000_007;

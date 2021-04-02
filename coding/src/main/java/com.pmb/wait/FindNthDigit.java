@@ -24,7 +24,7 @@ package com.pmb.wait;
  * <p>
  * 说明:
  * 第11个数字在序列 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... 里是0，它是10的一部分。
- *
+ * @star
  * @author lvrui
  */
 public class FindNthDigit {
@@ -55,7 +55,7 @@ public class FindNthDigit {
 
     public static void main(String[] args) {
         FindNthDigit digit = new FindNthDigit();
-        final int nthDigit = digit.findNthDigit(1000000000);
+        final int nthDigit = digit.findNthDigit(100);
     }
 
 

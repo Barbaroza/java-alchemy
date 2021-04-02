@@ -38,13 +38,28 @@ import com.pmb.code.model.TreeNode;
  * <p>
  * 输入：[1,0,0,null,3]
  * 输出：4
- *
+ * @star
  * @author lvrui
  */
 
 public class DistributeCoins {
+
+    private int cost = 0;
+
     public int distributeCoins(TreeNode root) {
-        
-        return 0;
+        dfs(root);
+        return cost;
+    }
+
+    private int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int right = dfs(root.right);
+        int left = dfs(root.left);
+        cost += Math.abs(left) + Math.abs(right);
+        return root.val + left + right - 1;
+
     }
 }

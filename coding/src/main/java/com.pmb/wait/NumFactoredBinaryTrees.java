@@ -32,6 +32,7 @@ import java.util.Map;
  * <p>
  * 1 <= A.length <= 1000.
  * 2 <= A[i] <= 10 ^ 9.
+ * @star
  *
  * @author lvrui
  */

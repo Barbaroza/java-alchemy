@@ -1,4 +1,4 @@
-package com.pmb.code.datastructure.tree;
+package com.pmb.wait;
 
 import com.pmb.code.model.TreeNode;
 
@@ -14,7 +14,7 @@ import java.util.LinkedList;
  * 展开后的单链表应该与二叉树 先序遍历 顺序相同。
  * @author lvrui
  */
-public class Flatten {
+public class Flatten2 {
 
 
     public TreeNode flatten(TreeNode root) {
@@ -52,7 +52,7 @@ public class Flatten {
         TreeNode right00 = new TreeNode(2, right000, right001);
         TreeNode right0 = new TreeNode(4, right00, null);
         TreeNode root = new TreeNode(0, left0, right0);
-        Flatten toList = new Flatten();
+        Flatten2 toList = new Flatten2();
         toList.flatten(root);
     }
 }

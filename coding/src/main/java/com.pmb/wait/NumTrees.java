@@ -19,6 +19,7 @@ package com.pmb.wait;
  * 2     1         2                 3
  * 通过次数86,624提交次数125,275
  *
+ * @star
  * @author lvrui
  */
 public class NumTrees {
@@ -42,7 +43,9 @@ public class NumTrees {
 
         for (int i = 2; i <= n; ++i) {
             for (int j = 1; j <= i; ++j) {
-                G[i] += G[j - 1] * G[i - j];
+                int r = j - 1;
+                int l = i - j;
+                G[i] += G[r] * G[l];
             }
         }
         return G[n];

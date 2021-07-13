@@ -94,7 +94,10 @@ public class PostorderTraversal {
         return res;
     }
 
-    public List<Integer> postorderTraversal2(TreeNode root) {
+    public List<Integer>
+
+
+    postorderTraversal2(TreeNode root) {
         LinkedList<TreeNode> stack = new LinkedList<>();
         LinkedList<Integer> output = new LinkedList<>();
         if (root == null) {

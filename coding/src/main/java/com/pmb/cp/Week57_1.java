@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * @author lvrui
  */
-public class Week57 {
+public class Week57_1 {
 
     /**
      * * 5806. 描述绘画结果

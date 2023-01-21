@@ -18,5 +18,6 @@
         <module>coding</module>
         <module>design-pattern</module>
         <module>data-structure</module>
+        <module>coding_2022</module>
     </modules>
 </project>

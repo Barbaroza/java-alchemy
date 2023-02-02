@@ -1,6 +1,7 @@
 package com.pmb.code.dp;
 
 /**
+ * https://leetcode.cn/problems/longest-increasing-subsequence/
  * @star
  */
 public class LengthOfLIS {

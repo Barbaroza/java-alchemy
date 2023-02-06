@@ -1,5 +1,8 @@
 package com.pmb.wait_2023_02_01;
 
+import com.pmb.code.model.TreeNode;
+
+import java.util.LinkedList;
 import java.util.stream.IntStream;
 
 /**
@@ -12,7 +15,7 @@ public class CountQuadruplets {
         int n = nums.length;
         int[][] moreThanJ = new int[n][n + 1];
         int[][] lessThanK = new int[n][n + 1];
-
+        LinkedList<TreeNode> queue = new LinkedList();
         IntStream.range(2, n - 1).forEach(i -> {
             int num = nums[i];
             //copy

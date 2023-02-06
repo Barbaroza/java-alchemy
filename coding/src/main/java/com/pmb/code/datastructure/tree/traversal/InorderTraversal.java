@@ -3,9 +3,7 @@ package com.pmb.code.datastructure.tree.traversal;
 
 import com.pmb.code.model.TreeNode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 中序遍历二叉树
@@ -22,8 +20,9 @@ import java.util.Stack;
  * <p>
  * 输出: [1,3,2]
  * 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
- * @star
+ *
  * @author lvrui
+ * @star
  */
 public class InorderTraversal {
     public List<Integer> inorderTraversal(TreeNode root) {
@@ -42,4 +41,5 @@ public class InorderTraversal {
         }
         return res;
     }
+
 }

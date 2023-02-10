@@ -77,6 +77,10 @@ public class NumIslands {
 
     private void bfs(char[][] grid, int i, int j) {
         Queue<Node> stack = new LinkedList<>();
+
+        StringBuilder sb = new StringBuilder();
+
+
         stack.add(new Node(i, j));
         while (!stack.isEmpty()) {
             Node pop = stack.remove();

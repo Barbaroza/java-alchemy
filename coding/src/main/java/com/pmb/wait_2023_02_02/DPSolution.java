@@ -159,6 +159,7 @@ public class DPSolution {
                 dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i - 1][j][0] - prices[i]);
             }
         }
+        Integer integer = Arrays.stream(new String[2]).map(String::length).min(Integer::compareTo).get(); int minLength = integer;
 
         return dp[n - 1][K][0];
     }

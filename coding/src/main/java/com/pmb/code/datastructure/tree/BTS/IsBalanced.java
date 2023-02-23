@@ -1,6 +1,5 @@
 package com.pmb.code.datastructure.tree.BTS;
 
-import com.pmb.code.model.ListNode;
 import com.pmb.code.model.TreeNode;
 
 /**
@@ -60,6 +59,31 @@ public class IsBalanced {
         }
     }
 
+    public boolean isBalanced2(TreeNode root) {
+
+        return root == null || isBalanced(root.right) && isBalanced(root.left) && Math.abs(dfs(root.left) - dfs(root.right)) <= 1;
+
+    }
+
+    private int dfs(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        return Math.max(dfs(node.right) + 1, dfs(node.left) + 1);
+    }
+    public boolean isBalanced3(TreeNode root) {
+        return recur(root) != -1;
+    }
+
+    private int recur(TreeNode root) {
+        if (root == null) return 0;
+        int left = recur(root.left);
+        if(left == -1) return -1;
+        int right = recur(root.right);
+        if(right == -1) return -1;
+        return Math.abs(left - right) < 2 ? Math.max(left, right) + 1 : -1;
+    }
 
 
 }

@@ -129,10 +129,17 @@ public class GetIntersectionNode {
             this.next = next;
         }
     }
-
-
-    public static void main(String[] args) {
-        GetIntersectionNode getIntersectionNode = new GetIntersectionNode();
-        getIntersectionNode.getIntersectionNode3(new ListNode(2, new ListNode(6, new ListNode(4))), new ListNode(1, new ListNode(5, null)));
+    public ListNode getIntersectionNode4(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        ListNode pA = headA, pB = headB;
+        while (pA != pB) {
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA : pB.next;
+        }
+        return pA;
     }
+
+
 }

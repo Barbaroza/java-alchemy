@@ -14,7 +14,7 @@ import com.pmb.code.model.TreeNode;
  * <p>
  * 前序遍历 preorder = [3,9,20,15,7]
  * 中序遍历 inorder = [9,3,15,20,7]
- *  后序遍历 postorder = [9,15,7,20,3]
+ * 后序遍历 postorder = [9,15,7,20,3]
  * 返回如下的二叉树：
  * <p>
  * 3
@@ -107,4 +107,31 @@ public class BuildTree {
         return root;
     }
 
+    public TreeNode buildTree3(int[] preorder, int[] inorder) {
+        return buildNode(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+    }
+
+
+    private TreeNode buildNode(int[] preorder, int pl, int pr, int[] inorder, int il, int ir) {
+        if (pl < 0 || pl > preorder.length - 1 || il < 0 || ir > inorder.length - 1 || pl > pr || il > ir) {
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[pl]);
+
+        int inorderIndex = indexOf(inorder, il, ir, preorder[pl]);
+        int leftNodeNum = inorderIndex - il;
+        root.left = buildNode(preorder, pl + 1, pl + leftNodeNum, inorder, il, inorderIndex);
+        root.right = buildNode(preorder, pl + leftNodeNum + 1, pr, inorder, inorderIndex + 1, ir);
+        return root;
+    }
+
+    private int indexOf(int[] arr, int start, int end, int value) {
+        for (int i = start; i <= end; i++) {
+            if (value == arr[i]) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

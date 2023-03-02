@@ -12,7 +12,9 @@ public class Fib {
         int pre2pre = 0;
         int pre = 1;
         if (n == 0) {
+
             return pre2pre;
+
         }
         if (n == 1) {
             return pre;

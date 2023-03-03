@@ -1,4 +1,4 @@
-package com.pmb.code.datastructure.math;
+package com.pmb.code.bitwise;
 
 /**
  * @author lvrui

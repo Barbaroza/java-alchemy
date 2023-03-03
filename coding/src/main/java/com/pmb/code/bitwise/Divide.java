@@ -59,7 +59,7 @@ public class Divide {
 
     public static void main(String[] args) {
         Divide divide = new Divide();
-        divide.divide(-1, -1);
+        divide.divide(10, 3);
     }
 
 }

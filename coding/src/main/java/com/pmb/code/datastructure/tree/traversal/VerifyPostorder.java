@@ -34,7 +34,7 @@ public class VerifyPostorder {
         Integer rootVal = Integer.MAX_VALUE;
         Stack<Integer> stack = new Stack<>();
         for (int i = postorder.length - 1; i >= 0; i--) {
-            if (postorder[i] < rootVal) {
+            if (postorder[i] > rootVal) {
                 return false;
             }
             while (!stack.isEmpty() && stack.peek() > postorder[i]) {

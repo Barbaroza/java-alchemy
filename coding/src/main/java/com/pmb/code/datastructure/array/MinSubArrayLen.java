@@ -44,4 +44,32 @@ public class MinSubArrayLen {
         MinSubArrayLen minSubArrayLen = new MinSubArrayLen();
         minSubArrayLen.minSubArrayLen(80, new int[]{10, 5, 13, 4, 8, 4, 5, 11, 14, 9, 16, 10, 20, 8});
     }
+
+    public int minSubArrayLen2(int target, int[] nums) {
+        int ans = 0;
+        if(nums == null || nums.length==0 ){
+            return ans;
+        }
+        ans = Integer.MAX_VALUE;
+        int n=nums.length;
+        int[][] dp = new int[n][n];
+
+        for(int i = 0;i<n;i++){
+            dp[i][i] = nums[i];
+            if(nums[i] >= target){
+                return 1;
+            }
+        }
+
+        for(int i = 1;i<n;i++){
+            for(int j=0;j<i;j++){
+                dp[i][j] = dp[i-1][j]+nums[i];
+                if(dp[i][j] >= target){
+                    ans = Math.min(ans,i-j+1);
+                }
+            }
+        }
+
+        return Integer.MAX_VALUE == ans? 0:ans;
+    }
 }

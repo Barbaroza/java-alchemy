@@ -120,4 +120,26 @@ public class LinkNodeSolution {
         listNode1.next = listNode2;
         isBalanced.removeNthFromEnd(listNode1,  2);
     }
+
+    public ListNode removeNthFromEnd3(ListNode head, int n) {
+        ListNode fast = head,slow=head;
+        ListNode vNode = new ListNode(Integer.MIN_VALUE);
+        ListNode preSlow = vNode;
+        vNode.next = head;
+        int cnt = 0;
+        while(fast!=null){
+            cnt++;
+            fast = fast.next;
+            if(cnt>n){
+                preSlow = slow;
+                slow = slow.next;
+            }
+        }
+
+        preSlow.next = slow!=null ? slow.next : null;
+
+        return vNode.next;
+    }
+
+
 }

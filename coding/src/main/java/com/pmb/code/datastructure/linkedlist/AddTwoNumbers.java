@@ -144,4 +144,49 @@ public class AddTwoNumbers {
         }
         return res.next;
     }
+
+    public ListNode addTwoNumbers4(ListNode l1, ListNode l2) {
+        ListNode l1R = reverse(l1);
+        ListNode l2R = reverse(l2);
+        ListNode ans = new ListNode(-1);
+        int rem = 0;
+
+        ListNode l1RH = l1R;
+        ListNode l2RH = l2R;
+        ListNode ansH = ans;
+        while(l1RH!=null || l2RH!=null||rem>0){
+            int sum = rem;
+            if(l2RH!=null){
+                sum+=l2RH.val;
+                l2RH = l2RH.next;
+            }
+            if(l1RH!=null){
+                sum+=l1RH.val;
+                l1RH=l1RH.next;
+            }
+            rem = sum>=10 ? 1:0;
+            ansH.next = new ListNode(sum%10);
+            ansH = ansH.next;
+        }
+
+        return reverse(ans.next);
+
+
+    }
+
+    private ListNode reverse(ListNode node){
+        ListNode pre = null;
+        ListNode cur = node;
+        while(cur!=null){
+            ListNode  t =  cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = t;
+        }
+
+
+        return pre;
+
+
+    }
 }

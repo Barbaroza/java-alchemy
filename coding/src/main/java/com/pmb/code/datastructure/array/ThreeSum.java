@@ -61,8 +61,58 @@ public class ThreeSum {
         return tempMap;
     }
 
+    public List<List<Integer>> threeSum2(int[] nums) {
+        List<List<Integer>> ans = new ArrayList();
+        if (nums == null || nums.length == 0) {
+            return ans;
+        }
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int l = i + 1;
+            int r = nums.length - 1;
+            while (l < r) {
+                while (l < r && nums[l] == nums[l - 1]) {
+                    l++;
+                }
+                while (r > l && r < nums.length - 1 && nums[r - 1] == nums[r]) {
+                    r--;
+                }
+
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum == 0) {
+                    List<Integer> t = new ArrayList();
+                    t.add(nums[i]);
+                    t.add(nums[l]);
+                    t.add(nums[r]);
+                    ans.add(t);
+                    l++;
+                    r--;
+                }
+                if (sum > 0) {
+                    r--;
+                }
+                if (sum < 0) {
+                    l++;
+                }
+
+
+            }
+
+        }
+
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         ThreeSum threeSum = new ThreeSum();
-        threeSum.threeSum(new int[]{-1, 0, 1, 2, -1, -4});
+        threeSum.threeSum2(new int[]{-1, 0, 1, 2, -1, -4});
     }
 }

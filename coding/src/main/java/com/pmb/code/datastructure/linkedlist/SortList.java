@@ -78,56 +78,49 @@ public class SortList {
         head.next.next.next = new ListNode(1);
         head.next.next.next.next = new ListNode(4);
         SortList sortList = new SortList();
-        head = sortList.sortList2(head);
+        head = sortList.sortList3(head);
         head = null;
     }
 
     public ListNode sortList2(ListNode head) {
-        if(head == null || head.next ==null)
-        {
+        if (head == null || head.next == null) {
             return head;
         }
         ListNode current = head;
         ListNode doubleCurrent = head;
-        while(doubleCurrent.next != null && doubleCurrent.next.next != null) {
+        while (doubleCurrent.next != null && doubleCurrent.next.next != null) {
             current = current.next;
             doubleCurrent = doubleCurrent.next.next;
         }
         ListNode leftList = sortList2(current.next);
         current.next = null;
         ListNode rightList = sortList2(head);
-        return sort(leftList,rightList);
+        return sort(leftList, rightList);
     }
 
-    private ListNode sort(ListNode left ,ListNode right)
-    {
-        if(left == null)
-        {
+    private ListNode sort(ListNode left, ListNode right) {
+        if (left == null) {
             return right;
         }
-        if(right == null)
-        {
+        if (right == null) {
             return left;
         }
         ListNode vNode = new ListNode(0);
         ListNode vTemp = vNode;
-        while(right!=null || left !=null)
-        {
-            if(right == null)
-            {
+        while (right != null || left != null) {
+            if (right == null) {
                 vTemp.next = left;
                 break;
             }
-            if(left == null ){
+            if (left == null) {
                 vTemp.next = right;
                 break;
             }
             ListNode tempNode = null;
-            if(left.val < right.val)
-            {
+            if (left.val < right.val) {
                 tempNode = left;
                 left = left.next;
-            }else{
+            } else {
                 tempNode = right;
                 right = right.next;
             }
@@ -138,4 +131,52 @@ public class SortList {
 
         return vNode.next;
     }
+
+
+    public ListNode sortList3(ListNode head) {
+
+        return mergeSort(head);
+    }
+
+    private ListNode mergeSort(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode q = head;
+        ListNode s = head;
+        while (q != null && q.next != null) {
+            q = q.next.next;
+            s = s.next;
+        }
+        ListNode right = mergeSort(s.next);
+        s.next = null;
+        ListNode left = mergeSort(head);
+        ListNode vNode = new ListNode(0);
+        ListNode pre = vNode;
+        while (left != null || right != null) {
+            ListNode next = null;
+            if (right != null && left != null) {
+                if (right.val < left.val) {
+                    next = right;
+                    right = right.next;
+                } else {
+                    next = left;
+                    left = left.next;
+                }
+            } else if (right == null) {
+                next = left;
+                left = left.next;
+            } else {
+                next = right;
+                right = right.next;
+            }
+            pre.next = next;
+            pre = next;
+        }
+
+
+        return vNode.next;
+    }
+
+
 }

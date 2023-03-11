@@ -52,8 +52,30 @@ public class FindMaxLength {
         return res;
     }
 
+    public int findMaxLength2(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return 0;
+        }
+        int max = Integer.MIN_VALUE;
+        int[] pre = new int[nums.length + 1];
+        pre[1] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+            int j = i - 2;
+            while (j+1 >= 0) {
+                if (pre[i + 1] - pre[j + 1] == ((i - j) >> 1)) {
+                    max = Math.max(max, i - j);
+                }
+                j -= 2;
+            }
+
+        }
+
+        return max == Integer.MIN_VALUE ? 0 : max;
+    }
+
     public static void main(String[] args) {
         FindMaxLength findMaxLength = new FindMaxLength();
-        int maxLength = findMaxLength.findMaxLength(new int[]{1, 1, 0});
+        int maxLength = findMaxLength.findMaxLength2(new int[]{0, 1});
     }
 }

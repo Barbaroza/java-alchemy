@@ -115,7 +115,31 @@ public class Subsets {
         }
     }
 
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        subsets(nums,0,ans,path);
 
+        return ans;
+    }
+
+
+    private void subsets(int[] nums,int index,List<List<Integer>> ans , LinkedList<Integer> path){
+        if(index == nums.length){
+            ans.add(new ArrayList(path));
+            return;
+        }
+
+
+
+
+        path.addLast(nums[index]);
+        subsets(nums,index+1,ans,path);
+        path.removeLast();
+
+        subsets(nums,index+1,ans,path);
+
+    }
     public static void main(String[] args) {
         Subsets sb = new Subsets();
         List<List<Integer>> lists = sb.subsets3(new int[]{1, 2, 3});

@@ -44,4 +44,35 @@ public class GenerateParenthesis {
             bt(res, s + (")"), left, ++right, n);
         }
     }
+
+    private static final String S_L ="(";
+    private static final String S_R = ")";
+    public List<String> generateParenthesis2(int n) {
+        List<String> ans = new ArrayList();
+        StringBuilder path = new StringBuilder();
+        dfs(path,n,n,n,ans);
+
+        return ans;
+    }
+
+
+    private void dfs(StringBuilder path, final int n,int leftRem,int rightRem,List<String> ans){
+        if(path.length() == n*2){
+            ans.add(path.toString());
+            return;
+        }
+        if(leftRem>0){
+            path.append(S_L);
+            dfs(path,n,leftRem-1,rightRem,ans);
+            path.delete(path.length()-1,path.length());
+        }
+        if(leftRem < rightRem && rightRem>0){
+            path.append(S_R);
+            dfs(path,n,leftRem,rightRem-1,ans);
+            path.delete(path.length()-1,path.length());
+        }
+
+
+
+    }
 }

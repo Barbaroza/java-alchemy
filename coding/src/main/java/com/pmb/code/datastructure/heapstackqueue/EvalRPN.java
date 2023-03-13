@@ -1,6 +1,7 @@
 package com.pmb.code.datastructure.heapstackqueue;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.Stack;
 
@@ -78,5 +79,53 @@ public class EvalRPN {
             res += stack.pop();
         }
         return res;
+    }
+
+    private static final String ADD ="+";
+    private static final String SUB ="-";
+    private static final String MULTI = "*";
+    private static final String DIV = "/";
+
+    LinkedList<Integer> operands = new LinkedList();
+
+    public int evalRPN2(String[] tokens) {
+        for(int i = 0;i<tokens.length;i++){
+            if(isOpreator(tokens[i])){
+                int o2 = operands.removeLast();
+                int o1 = operands.removeLast();
+                operands.addLast(operate(tokens[i], o1,o2));
+            }else{
+                operands.addLast(Integer.valueOf(tokens[i]));
+            }
+        }
+
+        return operands.removeLast();
+    }
+
+
+    private boolean isOpreator(String token){
+        if(ADD.equals(token)||SUB.equals(token)||MULTI.equals(token)||DIV.equals(token)){
+            return true;
+        }
+
+        return false;
+    }
+
+
+    private int operate(String operator,int operand1,int operand2){
+        if(ADD.equals(operator)){
+            return operand1 + operand2;
+        }
+        if(SUB.equals(operator)){
+            return operand1 - operand2;
+        }
+
+        if(MULTI.equals(operator)){
+            return operand1 * operand2;
+        }
+        if(DIV.equals(operator)){
+            return operand1 / operand2;
+        }
+        throw new RuntimeException("invalid op:"+operator);
     }
 }

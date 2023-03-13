@@ -72,4 +72,42 @@ public class MaxAreaOfIsland {
                 new int[]{0, 0, 0, 1, 1},
                 new int[]{1, 1, 0, 1, 1}});
     }
+
+    private static final Integer ISLAND_YES = 1;
+
+    public int maxAreaOfIsland2(int[][] grid) {
+        if(grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0){
+            return 0;
+        }
+        int max = 0;
+        boolean[][] visit = new boolean[grid.length][grid[0].length];
+
+        for(int i = 0;i<grid.length;i++){
+            for(int j = 0;j<grid[i].length;j++){
+                max = Math.max(ans(grid,i,j,visit),max);
+            }
+        }
+        return max;
+    }
+
+
+    private int ans(int[][] grid,int i,int j,boolean[][]visit){
+        if(i<0||j<0||i>grid.length-1||j>grid[i].length-1){
+            return 0;
+        }
+        if(visit[i][j]){
+            return 0 ;
+        }
+        visit[i][j] = true;
+        if(grid[i][j] != ISLAND_YES){
+            return 0;
+        }
+
+        return 1
+                +ans(grid,i,j+1,visit)
+                +ans(grid,i-1,j,visit)
+                +ans(grid,i+1,j,visit)
+                +ans(grid,i,j-1,visit);
+
+    }
 }

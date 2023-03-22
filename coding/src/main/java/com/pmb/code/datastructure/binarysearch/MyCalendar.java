@@ -52,6 +52,8 @@ public class MyCalendar {
         }
         // 类似二分搜索BST
         TreeNode p = root;
+        
+
         while(p!=null) {
             if(end <= p.start) {
                 // 该区间应该在当前节点的左子树

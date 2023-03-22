@@ -38,16 +38,16 @@ import java.util.*;
  * @author lvrui
  */
 public class RandomizedSet {
-    private List<Integer> list;
-    private Map<Integer, Integer> map;
+    private Map<Integer, Integer> indexMap;
+    private List<Integer> arr;
     private Random random;
 
     /**
      * Initialize your data structure here.
      */
     public RandomizedSet() {
-        list = new ArrayList<Integer>();
-        map = new HashMap<>();
+        indexMap = new HashMap();
+        arr = new ArrayList();
         random = new Random();
     }
 
@@ -55,36 +55,41 @@ public class RandomizedSet {
      * Inserts a value to the set. Returns true if the set did not already contain the specified element.
      */
     public boolean insert(int val) {
-        boolean isContains = map.containsKey(val);
-        if (!isContains) {
-            list.add(val);
-            map.put(val, list.size() - 1);
+        if (indexMap.containsKey(val)) {
+            return false;
         }
-        return !isContains;
+
+        indexMap.put(val, arr.size());
+        arr.add(val);
+        return true;
     }
 
     /**
      * Removes a value from the set. Returns true if the set contained the specified element.
      */
     public boolean remove(int val) {
-        Integer index = map.get(val);
-        if (index != null) {
-            map.remove(val);
-            Integer last = list.get(list.size() - 1);
-            map.put(last, index);
-            list.set(index, last);
-            list.remove(list.size() - 1);
-            return true;
-        } else {
+        Integer toMoveIndex = indexMap.remove(val);
+        if (toMoveIndex == null) {
             return false;
         }
+
+        int swap = arr.get(arr.size() - 1);
+        if (swap != val) {
+            arr.set(toMoveIndex, swap);
+            indexMap.put(swap, toMoveIndex);
+
+        }
+        arr.remove(arr.size() - 1);
+
+
+        return true;
     }
 
     /**
      * Get a random element from the set.
      */
     public int getRandom() {
-        return list.get(random.nextInt(list.size()));
+        return arr.get(random.nextInt(arr.size()));
     }
 
     public static void main(String[] args) {

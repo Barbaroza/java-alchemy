@@ -58,6 +58,29 @@ public class LenLongestFibSubseq {
         return ans;
     }
 
+    public int lenLongestFibSubseq3(int[] arr) {
+        int ans = 0;
+        int n  = arr.length;
+        int[][] dp = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            access.put(arr[i], i);
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i - 1; j >= 0 ; j--) {
+                int k = access.getOrDefault(arr[i] - arr[j], -1);
+                if (k >= 0 && k<j) {
+                    dp[j][i] = Math.max(dp[k][j] + 1, 3);
+                }
+                ans = Math.max(ans, dp[j][i]);
+            }
+        }
+        return ans;
+
+
+
+    }
 
     public static void main(String[] args) {
         LenLongestFibSubseq lenLongestFibSubseq = new LenLongestFibSubseq();

@@ -1,4 +1,4 @@
-package com.pmb.code.datastructure.tree;
+package com.pmb.code.datastructure.tree.ancestor;
 
 import com.pmb.code.model.TreeNode;
 

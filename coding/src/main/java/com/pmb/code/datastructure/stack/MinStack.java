@@ -3,6 +3,7 @@ package com.pmb.code.datastructure.stack;
 import java.util.LinkedList;
 
 /**
+ * https://leetcode.cn/problems/sort-of-stacks-lcci/solution/by-ma-33-f3hb/
  * @author lvrui
  */
 public class MinStack {

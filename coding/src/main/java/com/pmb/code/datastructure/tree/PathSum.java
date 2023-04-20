@@ -1,5 +1,6 @@
 package com.pmb.code.datastructure.tree;
 
+import com.pmb.code.basic.prefix.Solution;
 import com.pmb.code.model.TreeNode;
 
 import java.util.HashMap;
@@ -59,4 +60,32 @@ public class PathSum {
 
         return res;
     }
+
+
+    public int pathSum3(TreeNode root, int sum) {
+        if (root == null) {
+            return 0;
+        }
+
+
+        return cnt(root, sum)
+                + cnt(root.left, sum)
+                + cnt(root.right, sum);
+    }
+
+
+    private int cnt(TreeNode root, int sum) {
+        if (root == null) {
+            return 0;
+        }
+        int ans = 0;
+        if (sum == root.val) {
+            ans = 1;
+        }
+
+        return ans + cnt(root.left, sum - root.val) + cnt(root.right, sum - root.val);
+    }
+
+
+
 }

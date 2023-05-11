@@ -45,13 +45,33 @@ public class WiggleSort {
         }
     }
 
+    public void wiggleSort3(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        int l = nums.length;
+        if (nums.length == 2) {
+            int a = nums[0];
+            int b = nums[1];
+            nums[0] = Math.max(a, b);
+            nums[1] = Math.min(a, b);
+            return;
+        }
 
+        Arrays.sort(nums);
+        int left = 0;
+        while (left < l - 1) {
+            int t = nums[left + 1];
+            nums[left + 1] = nums[left];
+            nums[left] = t;
+            left += 2;
+        }
+    }
     public static void main(String[] args) {
         WiggleSort sort = new WiggleSort();
         int[] test = new int[]{5, 3, 1, 2, 3};
         int[] ints = Arrays.copyOf(test, test.length);
-        sort.wiggleSort(test);
-        sort.wiggleSort2(ints);
+        sort.wiggleSort3(test);
 
         ints = null;
     }

@@ -75,6 +75,44 @@ public class SearchMatrix2 {
                 18, 21, 23, 26, 30
         }}, 5);
     }
+    public boolean searchMatrix2(int[][] matrix, int target) {
+        if(matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0){
+            return false;
+        }
+        int n = matrix.length;
+        int m = matrix[0].length;
+        boolean find = false;
+        for(int i = 0;i<n && !find ;i++){
+            if(matrix[i][0]>target){
+                break;
+            }
+            if(matrix[i][m-1]<target){
+                continue;
+            }
 
+            find = binSearch(matrix[i],target);
+        }
+
+
+        return find;
+    }
+
+    private boolean binSearch(int[] arr,int target){
+        int l = 0;
+        int r = arr.length-1;
+
+        while(l<=r){
+            int mid = l+((r-l)>>1);
+            if(arr[mid]<target){
+                l = mid+1;
+            }else if(arr[mid]>target){
+                r = mid -1;
+            }else{
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

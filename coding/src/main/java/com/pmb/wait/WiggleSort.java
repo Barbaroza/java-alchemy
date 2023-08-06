@@ -31,7 +31,6 @@ public class WiggleSort {
                 nums[index + 1] = temp;
             }
         }
-
     }
 
 

@@ -18,6 +18,4 @@ public class MinNumber {
             res.append(s);
         return res.toString();
     }
-
-
 }

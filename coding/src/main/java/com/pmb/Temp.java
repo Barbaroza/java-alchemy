@@ -36,17 +36,17 @@ public class Temp {
             if (cnt < cap) {
 
                 arr[cnt++] = a;
-                shiftUp();
+//                shiftUp();
             } else {
                 if (arr[1] > a) {
                     arr[1] = a;
-                    shiftDown();
+//                    shiftDown();
                 }
             }
         }
 
         public int remove() {
-
+            return 0;
         }
     }
 

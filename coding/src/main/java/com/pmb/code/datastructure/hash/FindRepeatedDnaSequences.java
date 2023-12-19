@@ -1,4 +1,4 @@
-package com.pmb.wait.wait_202110;
+package com.pmb.code.datastructure.hash;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,6 +61,38 @@ public class FindRepeatedDnaSequences {
         return ans;
     }
 
+    public List<String> findRepeatedDnaSequences3(String s, int length) {
+        if (s == null || length < 0 || s.length() < length) {
+            return new ArrayList<>();
+        }
+        List<String> res = new ArrayList<>();
+
+        int mask = 1 << (2 * length) - 1;
+
+        int cur = 0;
+        Map<Integer, Integer> counter = new HashMap<>();
+
+        for (int i = 0; i < length; i++) {
+            cur <<= 2;
+            cur |= bin.get(s.charAt(i));
+            counter.put(cur, 1);
+        }
+
+
+        for (int i = length; i < s.length(); i++) {
+
+            cur <<= 2;
+            cur &= mask;
+            cur |= bin.get(s.charAt(i));
+            Integer cnt = counter.getOrDefault(cur, 0);
+            if (cnt == 1) {
+                res.add(s.substring(i, i + length));
+            } else {
+                counter.put(cur, cnt + 1);
+            }
+        }
+        return res;
+    }
 
     public List<String> findRepeatedDnaSequences2(String s) {
         List<String> ans = new ArrayList<String>();
@@ -76,5 +108,12 @@ public class FindRepeatedDnaSequences {
         return ans;
     }
 
+
+    public static void main(String[] args) {
+        String test = "ACGTAT";
+        FindRepeatedDnaSequences findRepeatedDnaSequences = new FindRepeatedDnaSequences();
+
+        List<String> repeatedDnaSequences3 = findRepeatedDnaSequences.findRepeatedDnaSequences3(test, 1);
+    }
 
 }

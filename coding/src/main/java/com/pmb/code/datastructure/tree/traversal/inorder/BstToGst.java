@@ -1,4 +1,4 @@
-package com.pmb.wait;
+package com.pmb.code.datastructure.tree.traversal.inorder;
 
 import com.pmb.code.model.TreeNode;
 
@@ -69,4 +69,31 @@ public class BstToGst {
         }
         return root;
     }
+
+
+    public TreeNode bstToGst2(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+
+        LinkedList<TreeNode> path = new LinkedList<>();
+        TreeNode cur = root;
+        int res = 0;
+        while (!path.isEmpty() || cur != null) {
+            while (cur != null ) {
+                path.addFirst(cur);
+                cur = cur.right;
+            }
+            TreeNode treeNode = path.removeFirst();
+            res += treeNode.val;
+            treeNode.val = res;
+
+            cur = cur.left;
+
+        }
+
+
+        return root;
+    }
+
 }

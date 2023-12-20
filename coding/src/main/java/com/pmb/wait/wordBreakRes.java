@@ -1,6 +1,6 @@
 package com.pmb.wait;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * 输入:
@@ -32,20 +32,38 @@ import java.util.List;
  * []
  */
 
-
-
-
-
-
-
-
-
-
-
-
 public class wordBreakRes {
+    //@WAIT-V
     public List<String> wordBreak(String s, List<String> wordDict) {
-//        List<String> res = new ArrayList
-        return null;
+        List<String> res = new ArrayList<>();
+
+        if (s == null || s.isEmpty() || wordDict == null || wordDict.isEmpty()) {
+            return res;
+        }
+        Set<String> unique = new HashSet<>(wordDict);
+        int min = wordDict.stream().mapToInt(String::length).min().getAsInt();
+        int max = wordDict.stream().mapToInt(String::length).max().getAsInt();
+
+        LinkedList<String> path = new LinkedList<>();
+
+        dfs(0, min, max, path, unique, s, res);
+
+
+        return res;
+    }
+
+    private void dfs(int start, int min, int max, LinkedList<String> path, Set<String> unique, String s, List<String> res) {
+        if (start == s.length() && !path.isEmpty()) {
+            res.add(Joiner.on(" ").join(path));
+            return;
+        }
+        for (int i = min; i <= max && start + i <= s.length(); i++) {
+            String sub = s.substring(start, start + i);
+            if (unique.contains(sub)) {
+                path.addLast(sub);
+                dfs(start + i + 1, min, max, path, unique, s, res);
+                path.removeLast();
+            }
+        }
     }
 }

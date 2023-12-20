@@ -1,7 +1,9 @@
 package com.pmb.wait;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
@@ -68,5 +70,30 @@ public class WordBreak {
             add("aaa");
         }});
     }
+    public static boolean wordBreak2(String s, List<String> wordDict) {
+        //validate
+        if (s == null || s.isEmpty() || wordDict == null || wordDict.isEmpty()) {
+            return false;
+        }
 
+        //min max
+        int max = wordDict.stream().mapToInt(String::length).max().getAsInt();
+        int min = wordDict.stream().mapToInt(String::length).min().getAsInt();
+
+        Set<String> unique = new HashSet<>(wordDict);
+
+        return wordBreak(s, min, max, unique);
+    }
+
+    private static boolean wordBreak(String s, int min, int max, Set<String> unique) {
+        boolean flag = unique.contains(s);
+        int i = min;
+        int length = s.length();
+        while (i <= max && i <= length && !flag) {
+            flag = unique.contains(s.substring(0, i))
+                    && wordBreak(s.substring(i + 1, length), min, max, unique);
+            i++;
+        }
+        return flag;
+    }
 }

@@ -1,4 +1,4 @@
-package com.pmb.wait;
+package com.pmb.code.datastructure.string.palindrome;
 
 import java.util.ArrayList;
 import java.util.List;

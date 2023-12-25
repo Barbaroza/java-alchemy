@@ -40,6 +40,7 @@ package com.pmb.wait;
  * 1 <= N <= 10000
  */
 public class SuperEggDrop {
+    //https://www.jianshu.com/p/2f06a3eb953c
     public int superEggDrop(int K, int N) {
         return 0;
     }

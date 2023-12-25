@@ -1,6 +1,9 @@
 package com.pmb.code.datastructure.tree.brt;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * https://leetcode-cn.com/problems/data-stream-as-disjoint-intervals/
@@ -105,18 +108,10 @@ public class SummaryRanges {
 
     List<int[]> holder = new ArrayList<>();
 
-    public void addNum2(int num) {
-        int index = binsearch(num);
-        int preIndex = index - 1;
-        int postIndex = index + 1;
-
-
-    }
 
     public int[][] getIntervals2() {
         return holder.toArray(new int[holder.size()][2]);
     }
-
 
 
 }

@@ -1,4 +1,4 @@
-package com.pmb.wait;
+package com.pmb.code.ana;
 
 import java.util.Arrays;
 

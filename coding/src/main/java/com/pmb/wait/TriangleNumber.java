@@ -21,7 +21,7 @@ import java.util.Arrays;
  * 数组长度不超过1000。
  * 数组里整数的范围为 [0, 1000]。
  * 通过次数23,926提交次数46,893
- *
+ * @wait-v
  * @author lvrui
  */
 public class TriangleNumber {
@@ -50,7 +50,24 @@ public class TriangleNumber {
         }
         return cnt;
     }
+    public int triangleNumber3(int[] nums) {
+        int cnt = 0;
 
+        Arrays.sort(nums);
+
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            for (int j = i + 1; j < nums.length - 1; j++) {
+                int third = Arrays.binarySearch(nums, nums[i] + nums[j]);
+                if (third > j) {
+                    cnt += (third - j);
+                }
+
+            }
+        }
+
+        return cnt;
+    }
     public static void main(String[] args) {
         TriangleNumber triangleNumber = new TriangleNumber();
         int i = triangleNumber.triangleNumber(new int[]{24, 3, 82, 22, 35, 84, 19});

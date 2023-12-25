@@ -1,4 +1,4 @@
-package com.pmb.wait;
+package com.pmb.code.datastructure.tree.deserial;
 
 import com.pmb.code.model.TreeNode;
 
@@ -56,7 +56,7 @@ import java.util.function.ToIntFunction;
  * 树中结点数目总数在范围 [1, 1000] 内
  * 0 <= Node.val <= 1000
  * 通过次数21,746提交次数41,019
- *
+ * @wait-v
  * @author lvrui
  */
 public class VerticalTraversal {
@@ -92,5 +92,52 @@ public class VerticalTraversal {
 
         VerticalTraversal verticalTraversal = new VerticalTraversal();
         verticalTraversal.verticalTraversal(treeNode);
+    }
+
+
+    public List<List<Integer>> verticalTraversal2(TreeNode root) {
+        TreeMap<Integer, TreeMap<Integer, TreeSet<Integer>>> holder = new TreeMap<>((o1, o2) -> {
+            return o1 - o2;
+        });
+
+        preOrder(0, 0, holder, root);
+
+
+        return convert(holder);
+
+    }
+
+    private void preOrder(int col, int row, TreeMap<Integer, TreeMap<Integer, TreeSet<Integer>>> holder, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        TreeMap<Integer, TreeSet<Integer>> defaultMap = new TreeMap<>((o1, o2) -> o1 - o2);
+        TreeMap<Integer, TreeSet<Integer>> curCol = holder.getOrDefault(col, defaultMap);
+        curCol = curCol == null ? defaultMap : curCol;
+        TreeSet<Integer> defaultSet = new TreeSet<>((o1, o2) -> o1 - o2);
+        TreeSet<Integer> curColRow = curCol.getOrDefault(row, defaultSet);
+        curColRow = curColRow == null ? defaultSet : curColRow;
+        curColRow.add(root.val);
+        curCol.put(row, curColRow);
+        holder.put(col, curCol);
+
+        preOrder(col - 1, row + 1, holder, root.left);
+        preOrder(col + 1, row + 1, holder, root.right);
+
+
+    }
+
+    private List<List<Integer>> convert(TreeMap<Integer, TreeMap<Integer, TreeSet<Integer>>> holder) {
+        List<List<Integer>> convert = new ArrayList<>(holder.size());
+
+        for (Map.Entry<Integer, TreeMap<Integer, TreeSet<Integer>>> col : holder.entrySet()) {
+            TreeMap<Integer, TreeSet<Integer>> value = col.getValue();
+            for (TreeSet<Integer> col2Row : value.values()) {
+                convert.add(new ArrayList<>(col2Row));
+            }
+        }
+
+        return convert;
     }
 }

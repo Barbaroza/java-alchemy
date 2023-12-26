@@ -1,5 +1,6 @@
 package com.pmb.wait;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -98,6 +99,34 @@ public class SplitIntoFibonacci {
         return res;
     }
 
+    public List<Integer> splitIntoFibonacci2(String S) {
+        List<Integer> list = new ArrayList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        backTrack(list, path, 0, S);
+
+        return list;
+    }
+
+    private boolean backTrack(List<Integer> list, LinkedList<Integer> path, int start, String str) {
+        if (path.size() > 2 && start == str.length()) {
+            list.addAll(path);
+            return true;
+        }
+        boolean flag = false;
+        for (int i = start + 1; i <= str.length() && !flag; i++) {
+            String substring = str.substring(start, i);
+            if (substring.startsWith("0")) {
+                break;
+            }
+            Integer slice = Integer.valueOf(substring);
+            if ((path.size() > 1 && path.get(path.size() - 1) + path.get(path.size() - 2) == slice) || path.size() < 2) {
+                path.addLast(slice);
+                flag = backTrack(list, path, i, str);
+                path.removeLast();
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         SplitIntoFibonacci fibonacci = new SplitIntoFibonacci();

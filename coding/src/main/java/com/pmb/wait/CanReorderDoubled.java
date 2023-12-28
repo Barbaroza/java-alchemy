@@ -1,5 +1,8 @@
 package com.pmb.wait;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 954. 二倍数对数组
  * 给定一个长度为偶数的整数数组 A，只有对 A 进行重组后可以满足 “对于每个 0 <= i < len(A) / 2，都有 A[2 * i + 1] = 2 * A[2 * i]” 时，返回 true；否则，返回 false。
@@ -31,10 +34,41 @@ package com.pmb.wait;
  * A.length 为偶数
  * -100000 <= A[i] <= 100000
  * @author lvrui
+ *
+ * @wait-v
  */
 public class CanReorderDoubled {
 
-    public boolean canReorderDoubled(int[] A) {
-        return false;
-    }
-}
+    public static boolean canReorderDoubled(int[] a) {
+        if (a == null || a.length % 2 == 1 || a.length == 0) {
+            return false;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : a) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        for (int num : a) {
+            Integer cnt = map.getOrDefault(num, 0);
+            if (cnt == 0) {
+                continue;
+            }
+            int targetCnt = 0;
+            int target = Integer.MAX_VALUE;
+            if (num % 2 == 0) {
+                target = num / 2;
+                targetCnt = map.getOrDefault(target, 0);
+            }
+            if (targetCnt == 0) {
+                target = num * 2;
+                targetCnt = map.getOrDefault(target, 0);
+            }
+            if (targetCnt > 0) {
+                map.put(target, --targetCnt);
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }}

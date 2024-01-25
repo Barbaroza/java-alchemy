@@ -20,6 +20,7 @@ package com.pmb.code.datastructure.linkedlist;
  * 1-2-3-7-8-11-12-9-10-4-5-6-NULL
  *
  * @author lvrui
+ * @wait-v
  */
 public class Flatten {
 
@@ -49,7 +50,24 @@ public class Flatten {
         childLast.next = next;
         next.prev = childLast;
     }
-
+    public Node flatten2(Node head) {
+        Node hasChild = head;
+        Node cur = head;
+        while (hasChild != null) {
+            if (hasChild.child != null) {
+                Node temp = cur;
+                cur = hasChild.child;
+                hasChild.child.prev = temp;
+            }
+            while (cur.next != null) {
+                cur = cur.next;
+            }
+            while (hasChild.child != null) {
+                hasChild = hasChild.next;
+            }
+        }
+        return head;
+    }
     class Node {
         public int val;
         public Node prev;

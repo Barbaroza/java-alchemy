@@ -29,7 +29,7 @@ import java.util.Arrays;
  * 输入：costs = [1,6,3,1,2,5], coins = 20
  * 输出：6
  * 解释：Tony 可以买下所有的雪糕，总价为 1 + 6 + 3 + 1 + 2 + 5 = 18 。
- *
+ * @wait-v
  * @author lvrui
  */
 public class MaxIceCream {
@@ -47,5 +47,16 @@ public class MaxIceCream {
         }
 
         return cnt;
+    }
+
+
+    public int maxIceCream2(int[] costs, int coins) {
+        Arrays.sort(costs);
+        int preSummary = 0;
+        int index = 0;
+        while (preSummary < coins) {
+            preSummary += costs[index++];
+        }
+        return index;
     }
 }

@@ -62,5 +62,18 @@ public class MaxFrequency {
         }
         return max;
     }
+    public int maxFrequency3(int[] nums, int k) {
+        int max = 1;
+        int res = -1;
+        for (int index = 1; index < nums.length; index++) {
+            int temp = nums[index];
+            nums[index] += nums[index - 1];
+            if (temp * max - (nums[index] - nums[index - max]) <= k) {
+                res = temp;
+                max++;
+            }
+        }
 
+        return res == -1 ? nums[0] : res;
+    }
 }

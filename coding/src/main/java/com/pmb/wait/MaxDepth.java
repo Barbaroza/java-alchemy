@@ -1,6 +1,8 @@
 package com.pmb.wait;
 
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Stack;
 
 /**
@@ -19,6 +21,8 @@ import java.util.Stack;
  * /  \
  * 15   7
  * 返回它的最大深度 3 。
+ *
+ * @wiat-v
  *
  * @author Administrator
  */
@@ -51,6 +55,34 @@ public class MaxDepth {
         return max;
     }
 
+    public int maxDepth3(TreeNode root) {
+        LinkedList<TreeNode> deque = new LinkedList<>();
+        int i = 0;
+        Optional.ofNullable(root).ifPresent(deque::addFirst);
+        while (!deque.isEmpty()) {
+            int size = deque.size();
+            while (size > 0) {
+                TreeNode treeNode = deque.removeLast();
+                if (treeNode.left != null) {
+                    deque.addLast(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    deque.addLast(treeNode.right);
+                }
+                size--;
+            }
+            i++;
+        }
+        return i;
+    }
+
+
+    public int maxDepth2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth2(root.right), maxDepth2(root.left));
+    }
 
     public class TreeNode {
 

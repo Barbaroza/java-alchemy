@@ -1,4 +1,4 @@
-package com.pmb.wait;
+package com.pmb.code.dp;
 
 /**
  * 518. 零钱兑换 II
@@ -54,9 +54,26 @@ public class Change {
 
     public static void main(String[] args) {
         Change change = new Change();
-        change.change(5,
+        change.change2(5,
                 new int[]{
-                        1, 2, 5
+                        5, 2, 1
                 });
+    }
+
+
+    public int change2(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+
+        for (int i = 1; i < amount + 1; i++) {
+            for (int coin : coins) {
+
+                if (coin <= i) {
+                    dp[i] += dp[i - coin];
+                }
+            }
+        }
+
+        return dp[amount];
     }
 }

@@ -1,4 +1,4 @@
-package com.pmb.wait;
+package com.pmb.real;
 
 public class GetBillInfo {
     public static void getBillInfo(Double loanAmount, Integer months, Integer Prepayment, Double interestRate) {

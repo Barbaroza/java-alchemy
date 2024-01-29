@@ -1,6 +1,7 @@
 package com.pmb.wait;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 743.
@@ -39,6 +40,7 @@ import java.util.*;
  * 0 <= wi <= 100
  * 所有 (ui, vi) 对都 互不相同（即，不含重复边
  *
+ * @wait-v
  * @author lvrui
  */
 public class NetworkDelayTime {
@@ -106,6 +108,28 @@ public class NetworkDelayTime {
             this.weight = weight;
         }
     }
+
+    public int networkDelayTime2(int[][] cost, int n, int k) {
+        Map<Integer, Map<Integer, Integer>> nb = Arrays.stream(cost).collect(Collectors.groupingBy(e -> e[0], Collectors.toMap(e -> e[1], e -> e[2], (k1, k2) -> k1)));
+        Set<Integer> accessed = new HashSet<>();
+        int max = dfs(accessed, k, nb);
+
+        return accessed.size() != n ? -1 : max;
+    }
+
+    private int dfs(Set<Integer> accessed, int k, Map<Integer, Map<Integer, Integer>> nb) {
+
+        int cost = 0;
+        if (!accessed.add(k)) {
+            return cost;
+        }
+        Map<Integer, Integer> orDefault = nb.getOrDefault(k, new HashMap<>());
+        for (Map.Entry<Integer, Integer> edge : orDefault.entrySet()) {
+            cost = Math.max(dfs(accessed, edge.getKey(), nb), cost) + edge.getValue();
+        }
+        return cost;
+    }
+
 
     public static void main(String[] args) {
         NetworkDelayTime networkDelayTime = new NetworkDelayTime();
